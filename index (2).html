@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weekly Math Path · 52 weeks × ages 8–16</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#f3f0e8; --paper:#fffcf6; --ink:#1c2430; --muted:#5b6573;
+      --line:#e4ddd0; --accent:#2f6f5e; --accent-2:#c45c26;
+      --good:#1f7a4d; --bad:#b42318; --shadow:0 10px 30px rgba(40,30,16,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"DM Sans",system-ui,sans-serif;background:radial-gradient(1200px 500px at 10% -10%,#efe6d2 0%,transparent 50%),var(--bg);color:var(--ink);min-height:100vh}
+    header.app{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px;background:rgba(243,240,232,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{width:36px;height:36px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:700}
+    .brand h1{font-family:Fraunces,serif;font-size:1.12rem;margin:0}
+    .brand p{margin:0;font-size:.78rem;color:var(--muted)}
+    button{font:inherit;cursor:pointer;border:0}
+    .ghost{background:#fff;border:1px solid var(--line);padding:8px 14px;border-radius:999px}
+    .ghost:hover{border-color:#c9c0b0}
+    main{max-width:1100px;margin:0 auto;padding:22px 18px 70px}
+    .intro h2{font-family:Fraunces,serif;margin:0 0 6px;font-size:2rem}
+    .intro p{margin:0 0 16px;color:var(--muted);max-width:70ch}
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .filters button,.chip{background:#fff;border:1px solid var(--line);padding:7px 12px;border-radius:999px;color:var(--muted)}
+    .filters button.on,.chip.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+    #search{width:100%;max-width:360px;margin:8px 0 16px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+    .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;box-shadow:var(--shadow);cursor:pointer}
+    .card:hover{transform:translateY(-2px)}
+    .tag{font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);font-weight:700}
+    .card h3{margin:6px 0 6px;font-size:1rem}
+    .card p{margin:0;color:var(--muted);font-size:.85rem}
+    .hidden{display:none}
+    .lesson-wrap{display:grid;gap:16px}
+    .concept,.problem{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow)}
+    .concept h2,.problem h3{font-family:Fraunces,serif;margin:0 0 8px}
+    .concept p{margin:0;line-height:1.55}
+    .meta{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+    .q{font-size:1.2rem;font-weight:600;margin:8px 0 16px;line-height:1.4}
+    .choices{display:grid;gap:10px}
+    .choice{width:100%;text-align:left;padding:12px 14px;border-radius:12px;background:#fff;border:1.5px solid var(--line)}
+    .choice:hover:not(:disabled){border-color:var(--accent)}
+    .choice:disabled{cursor:default}
+    .choice.correct{background:#e8f6ee;border-color:var(--good);color:var(--good);font-weight:700}
+    .choice.wrong{background:#fdecea;border-color:var(--bad);color:var(--bad)}
+    .feedback{margin-top:14px;padding:12px 14px;border-radius:12px;line-height:1.5}
+    .feedback.ok{background:#e8f6ee}
+    .feedback.no{background:#fdecea}
+    .nav-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .primary{background:var(--accent);color:#fff;padding:10px 16px;border-radius:999px;font-weight:700}
+    .primary:disabled{opacity:.45;cursor:default}
+    .progress{height:8px;background:#e7e0d4;border-radius:99px;overflow:hidden;margin:8px 0 14px}
+    .progress>span{display:block;height:100%;background:var(--accent-2);width:0;transition:width .25s}
+    .done{text-align:center;padding:26px 12px}
+    .count{color:var(--muted);font-size:.85rem;margin:0 0 14px}
+  </style>
+</head>
+<body>
+<header class="app">
+  <div class="brand">
+    <div class="logo">∑</div>
+    <div>
+      <h1>Weekly Math Path</h1>
+      <p>Ages 8–16 · 52 weeks each · basics to pre-calculus</p>
+    </div>
+  </div>
+  <button class="ghost hidden" id="backBtn" type="button">← Back to weeks</button>
+</header>
+<main>
+  <section id="home">
+    <div class="intro">
+      <h2>52 weeks for every age</h2>
+      <p>Choose an age, then a week. Each week teaches one concept and gives 5 multiple-choice problems. After you pick an answer, the explanation appears.</p>
+    </div>
+    <div class="filters" id="ageBar"></div>
+    <div class="filters" id="qBar"></div>
+    <input id="search" type="search" placeholder="Search weekly concepts..." />
+    <p class="count" id="count"></p>
+    <div class="grid" id="weekGrid"></div>
+  </section>
+  <section id="lesson" class="lesson-wrap hidden"></section>
+</main>
+<script>
+const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const pick=a=>a[rand(0,a.length-1)];
+const shuffle=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+const simp=(n,d)=>{const g=gcd(n,d)||1;n/=g;d/=g;if(d<0){n=-n;d=-d}return d===1?String(n):n+"/"+d}
+
+function trio(answer, wrongs){
+  const set=new Set([String(answer)]);
+  (wrongs||[]).forEach(w=>{if(w!==undefined&&w!==null&&String(w)!==String(answer))set.add(String(w))});
+  let k=1;
+  while(set.size<3 && k<40){
+    const n=Number(answer);
+    set.add(Number.isFinite(n)?String(n+pick([-8,-5,-4,-3,-2,-1,1,2,3,4,5,8])):String(answer)+" ");
+    k++;
+  }
+  if(set.size<3) set.add("None of these");
+  const choices=shuffle([...set]).slice(0,3);
+  if(!choices.includes(String(answer))) choices[0]=String(answer);
+  const c=shuffle(choices);
+  return {choices:c, answer:c.indexOf(String(answer))};
+}
+
+/* 13 units × 4 weeks = 52 weeks per age */
+const RAW = {
+8:{grade:"Grade 3", units:[
+["Place value",[
+["Ones, tens, and hundreds","place","Each digit’s value depends on its place. In 482, 4 is 4 hundreds (400), 8 is 8 tens (80), and 2 is 2 ones."],
+["The thousands place","place","Four-digit numbers use thousands. In 3,482 the 3 means 3,000."],
+["Expanded form","expanded","Expanded form writes a number as a sum of place values, such as 345 = 300 + 40 + 5."],
+["Standard and word form","place","Standard form uses digits (245). Word form uses words (two hundred forty-five)."]
+]],
+["Comparing and rounding",[
+["Comparing 3-digit numbers","compare","Start at the highest place. The first different digit tells which number is greater."],
+["Ordering numbers","order_nums","To order numbers, compare place by place, then list them least to greatest or greatest to least."],
+["Rounding to the nearest 10","round","Look at the ones digit. 5 or more rounds up; 4 or less rounds down."],
+["Rounding to the nearest 100","round","Look at the tens digit. 5 or more rounds the hundreds up; 4 or less keeps the hundreds the same."]
+]],
+["Addition",[
+["Adding without regrouping","add","Add ones, then tens, then hundreds when no place is 10 or more."],
+["Adding with regrouping","add","If a place adds to 10 or more, write the ones and carry 1 to the next place."],
+["Adding three numbers","add","Add two numbers first, then add the third. Regroup whenever a place reaches 10."],
+["Addition word problems","add","Find the total when groups are joined or combined. Look for words like in all, total, or altogether."]
+]],
+["Subtraction",[
+["Subtracting without regrouping","sub","Subtract ones from ones, tens from tens, hundreds from hundreds."],
+["Subtracting with regrouping","sub","If the top digit is too small, borrow 1 from the next place (that 1 is worth 10 in the current place)."],
+["Subtracting across zeros","sub","When you need to borrow from a zero, keep moving left until you find a non-zero digit."],
+["Subtraction word problems","sub","Find what is left, how many more, or the difference between two amounts."]
+]],
+["Meaning of multiplication",[
+["Equal groups","mul_small","a × b means a groups with b in each group."],
+["Arrays","mul_small","An array with r rows and c columns shows r × c."],
+["Repeated addition","mul_small","4 × 6 is 6+6+6+6. Multiplication is a fast way to add equal groups."],
+["The commutative property","mul_small","Order does not change the product: 3 × 8 = 8 × 3."]
+]],
+["Multiplication facts",[
+["Facts for 2, 5, and 10","mul_small","Twos are doubles, fives end in 0 or 5, tens add a zero."],
+["Facts for 3 and 4","mul_small","Use skip counting or known facts: 3×6 = 6+6+6, 4×6 = 2×6 doubled."],
+["Facts for 6 and 7","mul_small","Build from a nearby fact you know, then add one more group."],
+["Facts for 8 and 9","mul_small","8×n is 4×n doubled. 9×n is 10×n minus n."]
+]],
+["Division",[
+["Sharing equally","div_exact","Division splits a total into equal groups and asks how many are in each group, or how many groups."],
+["Relating multiplication and division","div_exact","If 6 × 4 = 24, then 24 ÷ 6 = 4 and 24 ÷ 4 = 6."],
+["Division facts","div_exact","Use the matching multiplication fact to divide."],
+["Division with leftovers","div_rem","If the total does not split evenly, the leftover is the remainder."]
+]],
+["Fractions",[
+["Unit fractions","unit_frac","A unit fraction is 1 over a whole number, like 1/4. The denominator is the number of equal parts."],
+["Fractions of a whole","frac_whole","The numerator counts how many equal parts you have; the denominator counts parts in one whole."],
+["Fractions on a number line","unit_frac","To place a/b, split 0 to 1 into b equal jumps and take a jumps."],
+["Comparing fractions with the same denominator","compare_frac","With the same denominator, the larger numerator is the larger fraction."]
+]],
+["Time and money",[
+["Telling time to 5 minutes","elapsed","The short hand is hours; the long hand is minutes. Each number on the clock is 5 minutes."],
+["Elapsed time","elapsed","Elapsed time is how much time passes from a start time to an end time."],
+["Counting coins and bills","money","Add coin values: quarters 25¢, dimes 10¢, nickels 5¢, pennies 1¢."],
+["Adding money","money","Line up the decimal points. Dollars are the whole-number part; cents are hundredths."]
+]],
+["Measurement",[
+["Measuring length","add","Length is measured in units such as inches or centimeters. Choose a unit, then count how many fit."],
+["Mass: grams and kilograms","compare","A kilogram is 1,000 grams. Compare and add masses using the same unit."],
+["Liquid volume: liters","add","Liters measure liquid volume. Add or subtract amounts in the same unit."],
+["Estimating measurements","round","Estimate by rounding to a friendly number, then compute."]
+]],
+["Perimeter and area",[
+["Perimeter of polygons","peri","Perimeter is the distance around a shape: add all side lengths."],
+["Area with unit squares","area_rect","Area counts square units that cover a shape with no gaps or overlaps."],
+["Area of rectangles","area_rect","Area of a rectangle = length × width."],
+["Rectilinear area","area_rect","Split an L-shape into rectangles, find each area, then add."]
+]],
+["Data",[
+["Picture graphs","mean","A pictograph uses pictures. Check the key to see how many each picture stands for."],
+["Bar graphs","mean","Bar height shows the value of each category. Read the scale carefully."],
+["Line plots","mean","A line plot shows data with Xs above a number line."],
+["Asking questions about data","mean","Use a graph to find most, least, totals, and differences."]
+]],
+["Patterns and review",[
+["Number patterns","pattern","A rule such as add 4 or multiply by 2 takes you from one term to the next."],
+["Input-output tables","inout","An input-output table uses one rule, such as y = x + 3, on every input."],
+["Two-step word problems","order_ops","Do the first action, then the second. Parentheses can show the first step."],
+["Grade 3 mixed review","add","Use place value, operations, fractions, and measurement together."]
+]]
+]},
+9:{grade:"Grade 4", units:[
+["Place value to millions",[
+["Places through hundred thousands","place","Each step left is 10 times greater. 50,000 is 10 times 5,000."],
+["Millions place","place","1,000 thousands make 1 million. Read large numbers in period groups."],
+["Expanded form of large numbers","expanded","6,204 = 6,000 + 200 + 4."],
+["Comparing large numbers","compare","Compare the highest place first, then move right until the digits differ."]
+]],
+["Multi-digit addition and subtraction",[
+["Adding multi-digit numbers","add","Line up places. Regroup whenever a column is 10 or more."],
+["Subtracting multi-digit numbers","sub","Line up places and borrow when needed."],
+["Estimating sums and differences","round","Round each number, then add or subtract to estimate."],
+["Multi-step +/− word problems","add","Decide which operations the story needs, then compute in order."]
+]],
+["Multi-digit multiplication",[
+["Multiplying by 10, 100, and 1,000","mul_2d","Multiplying by 10, 100, or 1,000 appends zeros and shifts place value."],
+["1-digit times 2-digit","mul_2d","Multiply ones, then tens, then add the partial products."],
+["1-digit times 3-digit","mul_3d","Work place by place from ones toward hundreds, regrouping as you go."],
+["2-digit times 2-digit","mul_2d","Compute tens×number plus ones×number, then add."]
+]],
+["Long division",[
+["Division as equal groups","div_exact","a ÷ b asks how many groups of b fit into a."],
+["2-digit ÷ 1-digit","div_exact","Divide, multiply, subtract, bring down. That is the long-division loop."],
+["Remainders","div_rem","The remainder must be smaller than the divisor."],
+["Interpreting remainders","div_rem","In a story, leftover may mean extra groups, leftover objects, or a fraction."]
+]],
+["Factors, multiples, primes",[
+["Factors","gcf","Factors of n are whole numbers that divide n evenly."],
+["Multiples","lcm","Multiples of n are n, 2n, 3n, …"],
+["Prime and composite","gcf","A prime has exactly two factors: 1 and itself. Composite numbers have more."],
+["Common factors","gcf","A common factor divides both numbers. The GCF is the greatest one."]
+]],
+["Equivalent fractions",[
+["Why fractions can look different","eq_frac","Multiplying numerator and denominator by the same number does not change the value."],
+["Finding equivalent fractions","eq_frac","Scale both parts of the fraction by 2, 3, 4, …"],
+["Simplifying fractions","eq_frac","Divide numerator and denominator by their GCF."],
+["Comparing fractions","compare_frac","Use common denominators, common numerators, or benchmarks like 1/2."]
+]],
+["Adding and subtracting fractions",[
+["Like denominators: add","add_frac","Add numerators and keep the denominator."],
+["Like denominators: subtract","sub_frac","Subtract numerators and keep the denominator."],
+["Mixed numbers","mixed_num","A mixed number is a whole number plus a fraction, such as 2 1/3."],
+["Fraction word problems","add_frac","Join or take away same-size pieces."]
+]],
+["Decimals",[
+["Tenths and hundredths","dec_place","0.4 is 4 tenths. 0.37 is 3 tenths and 7 hundredths."],
+["Decimals on a number line","dec_place","Tenths split each whole into 10; hundredths split each tenth into 10."],
+["Comparing decimals","compare","Compare digits from the tenths place rightward. 0.40 = 0.4."],
+["Relating fractions and decimals","dec_place","1/10 = 0.1 and 1/100 = 0.01."]
+]],
+["Angles",[
+["Points, rays, and angles","angles","An angle is two rays that share an endpoint (the vertex)."],
+["Acute, right, and obtuse","angles","Right = 90°, acute < 90°, obtuse > 90° and < 180°."],
+["Measuring angles","angles","A protractor measures degrees. A full turn is 360°."],
+["Adjacent angles","angles","Adjacent angles share a ray. Angle measures add when they form a larger angle."]
+]],
+["Area and perimeter",[
+["Perimeter formulas","peri","Rectangle perimeter = 2l + 2w. Add all sides for any polygon."],
+["Area of rectangles","area_rect","A = l × w, in square units."],
+["Area of rectilinear figures","area_rect","Decompose into rectangles, then add areas."],
+["Unknown side problems","area_rect","If area and one side are known, divide to find the other side."]
+]],
+["Measurement conversion",[
+["Kilometers, meters, centimeters","add","1 m = 100 cm, 1 km = 1,000 m. Multiply to go to a smaller unit."],
+["Kilograms and grams","add","1 kg = 1,000 g."],
+["Liters and milliliters","add","1 L = 1,000 mL."],
+["Hours, minutes, seconds","elapsed","1 hour = 60 minutes, 1 minute = 60 seconds."]
+]],
+["Geometry and symmetry",[
+["Parallel and perpendicular","angles","Parallel lines never meet. Perpendicular lines meet at 90°."],
+["Classifying triangles","triangle_sum","Triangles can be acute, right, or obtuse; also equilateral, isosceles, or scalene."],
+["Classifying quadrilaterals","angles","Squares, rectangles, rhombi, and parallelograms have special side and angle rules."],
+["Line symmetry","angles","A line of symmetry folds a shape onto itself."]
+]],
+["Data and review",[
+["Line plots with fractions","mean","Xs stacked above a number line show how often each value appears."],
+["Interpreting data","mean","Find total, difference, most common value, and typical value."],
+["Multi-step mixed problems","order_ops","Combine operations and measurement in one story."],
+["Grade 4 mixed review","mul_2d","Practice place value, operations, fractions, and geometry."]
+]]
+]},
+10:{grade:"Grade 5", units:[
+["Decimal place value",[
+["Thousandths","dec_place","0.006 is 6 thousandths. Each place to the right is 10 times smaller."],
+["Comparing decimals to thousandths","compare","Compare tenths, then hundredths, then thousandths."],
+["Rounding decimals","round","Look at the next digit to the right of the place you are rounding to."],
+["Powers of ten","exp_rules","Multiplying by 10^n shifts the decimal point n places left or right."]
+]],
+["Whole-number multiplication",[
+["3-digit × 1-digit","mul_3d","Multiply each place, regroup, then write the product."],
+["3-digit × 2-digit","mul_2d","Find two partial products, then add."],
+["Estimating products","round","Round factors, then multiply to check reasonableness."],
+["Multiplication word problems","mul_2d","Equal groups, arrays, and area all use multiplication."]
+]],
+["Whole-number division",[
+["4-digit ÷ 1-digit","div_exact","Long division: divide, multiply, subtract, bring down."],
+["3-digit ÷ 2-digit","div_exact","Estimate the quotient, then adjust if the remainder is too big."],
+["Remainders as fractions","div_rem","A remainder r with divisor d can be written r/d."],
+["Division word problems","div_exact","Sharing and grouping stories use division."]
+]],
+["Fractions with unlike denominators",[
+["Least common denominator","lcm","Rewrite fractions with a common denominator before adding or subtracting."],
+["Adding unlike fractions","add_frac","Convert, add numerators, then simplify."],
+["Subtracting unlike fractions","sub_frac","Convert, subtract numerators, then simplify."],
+["Mixed-number addition","mixed_num","Add wholes and fractions separately, then regroup if the fraction is improper."]
+]],
+["Multiplying fractions",[
+["Fraction times a whole number","mul_frac","a/b × n = (a×n)/b."],
+["Fraction times a fraction","mul_frac","Multiply numerators and multiply denominators."],
+["Area models for fraction products","mul_frac","A rectangle split both ways shows why you multiply across."],
+["Scaling","mul_frac","Multiplying by a fraction less than 1 makes a quantity smaller."]
+]],
+["Dividing fractions",[
+["Whole number ÷ unit fraction","div_frac","6 ÷ 1/2 asks how many halves are in 6, which is 12."],
+["Unit fraction ÷ whole number","div_frac","1/2 ÷ 4 = 1/8 because the half is split into 4 parts."],
+["Reciprocals","div_frac","Dividing by a/b is multiplying by b/a."],
+["Fraction division word problems","div_frac","How many groups of this size fit into that total?"]
+]],
+["Decimal operations",[
+["Adding decimals","dec_add","Line up decimal points, then add like whole numbers."],
+["Subtracting decimals","dec_sub","Line up decimal points and subtract, annexing zeros as needed."],
+["Multiplying decimals","dec_mul","Multiply as whole numbers, then count total decimal places."],
+["Dividing decimals","dec_mul","Shift the divisor to a whole number and shift the dividend the same way."]
+]],
+["Expressions and order",[
+["Order of operations","order_ops","Parentheses, exponents, multiply/divide left to right, add/subtract left to right."],
+["Numerical expressions","evaluate","An expression names a value but has no equals sign."],
+["Translating words to expressions","evaluate","'5 more than a number n' is n+5; 'triple a number' is 3n."],
+["Evaluating with grouping symbols","order_ops","Always simplify inside parentheses first."]
+]],
+["Volume",[
+["Cubic units","volume","Volume counts unit cubes that fill a solid."],
+["Volume of a rectangular prism","volume","V = l × w × h = B × h, where B is the base area."],
+["Additive volume","volume","Add volumes of prisms that are joined."],
+["Volume word problems","volume","Use the same units for every dimension before multiplying."]
+]],
+["Coordinate plane",[
+["Axes and origin","coord","The origin is (0,0). x is right/left; y is up/down."],
+["Plotting points in quadrant I","coord","From the origin move x right, then y up."],
+["Reading coordinates","coord","A point (a,b) has x-coordinate a and y-coordinate b."],
+["Problems on the grid","distance","Horizontal or vertical distance is the difference of the changing coordinate."]
+]],
+["Measurement and conversion",[
+["Metric conversions","add","Each metric step of 10, 100, or 1,000 multiplies or divides the number."],
+["Customary conversions","add","12 in = 1 ft, 3 ft = 1 yd, 16 oz = 1 lb."],
+["Multi-step conversions","mul_2d","Convert to one unit first, then compute."],
+["Unit sense","compare","Choose a reasonable unit before you compute."]
+]],
+["Data",[
+["Line plots with mixed numbers","mean","Read the scale, then find totals and typical values."],
+["Mean as a fair share","mean","Mean = sum of values ÷ number of values."],
+["Spread in data","range","Range = greatest value − least value."],
+["Making a data question","mean","A good question can be answered from the graph or table."]
+]],
+["Review and challenge",[
+["Fraction-decimal connections","dec_place","0.25 = 1/4, 0.5 = 1/2, 0.75 = 3/4."],
+["Mixed operation problems","order_ops","Use PEMDAS and keep track of units."],
+["Geometry and volume mixed","volume","Area is 2-D; volume is 3-D."],
+["Grade 5 mixed review","evaluate","Put decimals, fractions, volume, and expressions together."]
+]]
+]},
+11:{grade:"Grade 6", units:[
+["Ratios",[
+["What a ratio is","ratio","A ratio compares two quantities, written a:b, a to b, or a/b."],
+["Equivalent ratios","ratio","Multiply or divide both parts by the same nonzero number."],
+["Ratio tables","ratio","A ratio table lists equivalent pairs that keep the same relationship."],
+["Tape diagrams","ratio","A tape diagram shows ratio parts as equal-size bars."]
+]],
+["Rates and unit rates",[
+["Rates","unit_rate","A rate compares quantities with different units, such as miles per hour."],
+["Unit rates","unit_rate","A unit rate has 1 in the second quantity, like $8 per 1 hour."],
+["Better buy","unit_rate","Compare unit prices; the smaller price per unit is the better buy."],
+["Speed as a rate","unit_rate","Speed = distance ÷ time. Then distance = speed × time."]
+]],
+["Percents",[
+["Percent means per 100","percent","37% = 37/100 = 0.37."],
+["Percent of a number","pct_of","10% of a number is one tenth of it. 25% is one fourth."],
+["Finding the whole from a percent","pct_of","If 20% is 8, the whole is 8 ÷ 0.20 = 40."],
+["Benchmark percents","percent","Use 1%, 10%, 25%, 50% to estimate other percents."]
+]],
+["Integers",[
+["Positive and negative numbers","integers","Negatives are left of 0 on the number line; positives are right."],
+["Opposites and absolute value","absval","Absolute value is distance from 0, so it is never negative."],
+["Comparing integers","compare","The number farther right on the number line is greater. −2 > −5."],
+["Integers in context","integers","Elevation, temperature, and money use positives and negatives."]
+]],
+["Rational numbers",[
+["Negatives of fractions and decimals","integers","−3/4 is the opposite of 3/4."],
+["Adding rational numbers","integers","Adding a negative moves left; adding a positive moves right."],
+["Subtracting rational numbers","integers","Subtracting is adding the opposite: a − b = a + (−b)."],
+["Coordinate plane four quadrants","coord","Signs of (x,y) tell the quadrant: I (+,+), II (−,+), III (−,−), IV (+,−)."]
+]],
+["GCF and LCM",[
+["Greatest common factor","gcf","GCF is the largest integer that divides both numbers."],
+["Least common multiple","lcm","LCM is the smallest positive multiple shared by both numbers."],
+["Using GCF to simplify","eq_frac","Divide the numerator and denominator by the GCF."],
+["Using LCM as a common denominator","lcm","The LCM of the denominators is a common denominator."]
+]],
+["Expressions",[
+["Variables and terms","evaluate","A variable is a symbol for a number. Terms are added parts of an expression."],
+["Combining like terms","combine","Add coefficients of matching variable parts: 3x+5x=8x."],
+["Distributive property","distributive","a(b+c)=ab+ac."],
+["Evaluating expressions","evaluate","Replace each variable with a number, then use order of operations."]
+]],
+["Equations",[
+["One-step equations","one_step","Use the inverse operation on both sides to isolate the variable."],
+["Two-step equations","two_step","Undo addition or subtraction first, then undo multiplication or division."],
+["Writing equations","one_step","Translate a story into a balanced equation, then solve."],
+["Checking solutions","one_step","Substitute your answer back into the original equation."]
+]],
+["Inequalities",[
+["Inequality symbols","ineq","< less than, > greater than, ≤ at most, ≥ at least."],
+["Writing inequalities","ineq","'At least 12' means x ≥ 12."],
+["Solving one-step inequalities","ineq","Use inverse operations. Flip the sign if you multiply or divide by a negative."],
+["Graphing on a number line","ineq","Open circle for < or >; closed circle for ≤ or ≥."]
+]],
+["Area and surface area",[
+["Area of triangles","area_tri","A = (1/2)bh."],
+["Area of parallelograms","area_rect","A = bh."],
+["Area of polygons","area_tri","Decompose polygons into triangles and rectangles."],
+["Surface area of nets","surface","Surface area is the total area of all faces."]
+]],
+["Statistics",[
+["Mean","mean","Mean is the balance point: sum divided by count."],
+["Median","median","Median is the middle value after sorting."],
+["Mode and range","mode","Mode is most frequent. Range is max − min."],
+["Dot plots and histograms","mean","These displays show shape, center, and spread."]
+]],
+["Coordinate geometry",[
+["Plotting in all quadrants","coord","Signs tell direction: negative x left, negative y down."],
+["Distance on a grid","distance","If points share an x or y, subtract the other coordinates."],
+["Polygons on the plane","peri","Use coordinates to find side lengths, then perimeter or area."],
+["Reflections across axes","coord","Reflecting over the y-axis changes x to −x."]
+]],
+["Review",[
+["Ratio and percent mixed","pct_of","Percents are ratios out of 100."],
+["Integer operation review","integers","Keep track of signs using the number line or rules."],
+["Equation and inequality review","two_step","Equations find an exact value; inequalities find a set of values."],
+["Grade 6 mixed review","evaluate","Connect ratios, rationals, expressions, and area."]
+]]
+]},
+12:{grade:"Grade 7", units:[
+["Proportional relationships",[
+["Recognizing proportions","prop","Two ratios form a proportion when they are equivalent."],
+["Constant of proportionality","unit_rate","In y = kx, k is the constant of proportionality."],
+["Graphs through the origin","slope","A proportional graph is a line through (0,0)."],
+["Tables of proportional pairs","prop","y/x is the same value in every row."]
+]],
+["Percent applications",[
+["Percent increase","pct_change","New = original × (1 + rate)."],
+["Percent decrease","pct_change","New = original × (1 − rate)."],
+["Markups and discounts","pct_change","Markup adds a percent; discount subtracts a percent."],
+["Simple interest","growth","I = Prt, with r as a decimal and t in years."]
+]],
+["Rational number operations",[
+["Adding signed numbers","integers","Same signs: add and keep the sign. Different signs: subtract and take the sign of the larger absolute value."],
+["Subtracting signed numbers","integers","a − b = a + (−b)."],
+["Multiplying signed numbers","integers","Two negatives make a positive product. One negative makes a negative product."],
+["Dividing signed numbers","integers","Sign rules for division match multiplication."]
+]],
+["Equivalent expressions",[
+["Expanding expressions","expand","Use the distributive property to remove parentheses."],
+["Factoring out a GCF","distributive","ab + ac = a(b+c)."],
+["Combining like terms with negatives","combine","3x − 8x = −5x."],
+["Equivalent or not","combine","Two expressions are equivalent if they simplify to the same expression."]
+]],
+["Equations and inequalities",[
+["Two-step equations with negatives","two_step","Keep sign rules while undoing operations."],
+["Variables on both sides intro","two_step","Move variable terms to one side, constants to the other."],
+["Multi-step equations","two_step","Simplify each side first, then solve."],
+["Solving inequalities","ineq","Treat like equations, but flip the inequality when multiplying or dividing by a negative."]
+]],
+["Scale drawings",[
+["Scale factor","similar","Scale factor = drawing length ÷ actual length (or the reverse, depending on direction)."],
+["Finding missing lengths","similar","Set up a proportion with corresponding sides."],
+["Maps and blueprints","prop","A scale such as 1 cm : 5 km is a ratio."],
+["Scale and area","similar","Area scales by the square of the scale factor."]
+]],
+["Circles",[
+["Radius and diameter","circ","Diameter = 2 × radius."],
+["Circumference","circ","C = 2πr = πd."],
+["Area of a circle","area_circle","A = πr²."],
+["Circle word problems","circ","Decide whether the story needs distance around (C) or space inside (A)."]
+]],
+["Angles and triangles",[
+["Vertical and adjacent angles","angles","Vertical angles are equal. Adjacent angles on a line sum to 180°."],
+["Complementary and supplementary","angles","Complementary sum to 90°. Supplementary sum to 180°."],
+["Triangle angle sum","triangle_sum","The three interior angles of a triangle add to 180°."],
+["Drawing triangles","triangle_sum","Given sides and angles, some conditions make a unique triangle, more than one, or none."]
+]],
+["Probability",[
+["Sample space","prob","The sample space is the set of all possible outcomes."],
+["Theoretical probability","prob","P(event) = favorable / total, when outcomes are equally likely."],
+["Complement","prob","P(not A) = 1 − P(A)."],
+["Compound events","prob","For independent events, multiply probabilities."]
+]],
+["Statistics and sampling",[
+["Populations and samples","mean","A sample is a subset used to learn about a population."],
+["Representative samples","mean","Random samples are more likely to represent the population."],
+["Comparing distributions","mean","Compare centers (mean/median) and spreads (range)."],
+["Making inferences","mean","Use sample statistics to estimate population values."]
+]],
+["Surface area",[
+["Prisms","surface","Add the areas of the two bases and the rectangular sides."],
+["Pyramids","surface","Add the base area and the triangular face areas."],
+["Nets review","surface","A net is an unfolded surface. Its total area is the surface area."],
+["Surface area word problems","surface","Paint, wrapping, and material problems usually need surface area."]
+]],
+["Volume",[
+["Volume of prisms","volume","V = Bh, where B is the area of the base."],
+["Volume of pyramids","volume_cone","V = (1/3)Bh."],
+["Composite solids","volume","Add or subtract volumes of simpler solids."],
+["Volume word problems","volume","Filling problems use volume."]
+]],
+["Review",[
+["Proportional reasoning review","prop","Keep ratios equivalent; use cross products."],
+["Signed number review","integers","Apply sign rules before computing the size."],
+["Geometry mixed","circ","Circles, angles, and 3-D measures often appear together."],
+["Grade 7 mixed review","two_step","Connect proportions, equations, and geometry."]
+]]
+]},
+13:{grade:"Grade 8", units:[
+["Exponents",[
+["Positive exponents","exp_rules","aⁿ is a multiplied by itself n times."],
+["Product and power rules","exp_rules","aᵐ · aⁿ = aᵐ⁺ⁿ and (aᵐ)ⁿ = aᵐⁿ."],
+["Quotient rule","exp_rules","aᵐ / aⁿ = aᵐ⁻ⁿ when a ≠ 0."],
+["Zero and negative exponents","exp_rules","a⁰ = 1 (a≠0). a⁻ⁿ = 1/aⁿ."]
+]],
+["Scientific notation",[
+["Writing large numbers","sci","Move the decimal until the factor is at least 1 and less than 10."],
+["Writing small numbers","sci","0.0045 = 4.5 × 10⁻³."],
+["Multiplying in scientific notation","sci","Multiply the factors and add the exponents on 10."],
+["Comparing scientific notation","sci","Compare exponents first, then the leading factors."]
+]],
+["Roots and irrationals",[
+["Square roots","pyth","√n is the non-negative number whose square is n."],
+["Cube roots","evaluate","∛8 = 2 because 2³ = 8."],
+["Irrational numbers","pyth","√2 is irrational: it is not a ratio of integers."],
+["Approximating roots","pyth","√10 is between 3 and 4 because 3²=9 and 4²=16."]
+]],
+["Solving linear equations",[
+["Equations with like terms","two_step","Combine like terms first."],
+["Variables on both sides","two_step","Collect x terms on one side."],
+["Distributing then solving","two_step","Expand parentheses, then isolate x."],
+["No solution or infinitely many","two_step","If you get 3=5, no solution. If you get 3=3, infinitely many."]
+]],
+["Linear relationships",[
+["Slope","slope","m = (y₂−y₁)/(x₂−x₁) is rise over run."],
+["Slope-intercept form","line","y = mx + b has slope m and y-intercept b."],
+["Graphing from slope and intercept","line","Plot b on the y-axis, then use rise/run."],
+["Writing an equation from two points","slope","Find slope, then use a point to find b."]
+]],
+["Systems of equations",[
+["What a system means","system","A solution (x,y) sits on both lines: their intersection."],
+["Solving by graphing idea","system","One solution, no solution (parallel), or infinitely many (same line)."],
+["Solving by substitution","system","Solve one equation for a variable and plug into the other."],
+["Solving by elimination intro","system","Add or subtract equations to cancel a variable."]
+]],
+["Functions",[
+["Definition of a function","func","Each input has exactly one output."],
+["Function tables","func","The output is f(x) for each listed x."],
+["Linear vs nonlinear","func","A linear function has a constant rate of change."],
+["Qualitative graphs","func","Read increasing, decreasing, and constant sections from a sketch."]
+]],
+["Pythagorean theorem",[
+["a² + b² = c²","pyth","c is the hypotenuse, the side opposite the right angle."],
+["Finding a missing side","pyth","Take a square root after isolating the missing square."],
+["Converse of Pythagoras","pyth","If a²+b²=c², the triangle is right."],
+["Distance on the plane","distance","Distance = √[(x₂−x₁)²+(y₂−y₁)²], which is Pythagoras."]
+]],
+["Transformations",[
+["Translations","coord","A translation slides every point by the same (a,b)."],
+["Reflections","coord","Reflection over the x-axis sends (x,y) to (x,−y)."],
+["Rotations about the origin","coord","90° counterclockwise sends (x,y) to (−y,x)."],
+["Dilations","similar","A dilation from the origin multiplies coordinates by the scale factor k."]
+]],
+["Volume of curved solids",[
+["Cylinders","volume_cyl","V = πr²h."],
+["Cones","volume_cone","V = (1/3)πr²h."],
+["Spheres","volume_sphere","V = (4/3)πr³."],
+["Choosing a volume formula","volume_cyl","Match the solid: prism/cylinder use Bh; cone/pyramid use (1/3)Bh."]
+]],
+["Bivariate data",[
+["Scatter plots","slope","A scatter plot shows paired numerical data."],
+["Clustering and outliers","mean","A cluster is a tight group. An outlier sits far from the pattern."],
+["Positive and negative association","slope","Positive: as x rises, y tends to rise. Negative: y tends to fall."],
+["Informal trend lines","line","A trend line follows the cloud of points and can be used to estimate."]
+]],
+["Two-way tables",[
+["Reading two-way tables","prob","Entries show counts for two categories at once."],
+["Row and column totals","prob","Totals let you find relative frequencies."],
+["Relative frequency","prob","Relative frequency = count / total."],
+["Association in categories","prob","If percents differ a lot across rows, the variables may be associated."]
+]],
+["Review",[
+["Exponent and root review","exp_rules","Rewrite with rules, then evaluate simple cases."],
+["Linear systems review","system","Pick substitution or elimination and check in both equations."],
+["Pythagoras and volume review","pyth","Right triangles and 3-D formulas often appear in applied problems."],
+["Grade 8 mixed review","line","Functions, slope, exponents, and geometry together."]
+]]
+]},
+14:{grade:"Algebra 1", units:[
+["Foundations",[
+["Integer and rational review","integers","Fluency with signs and fractions is required before algebra."],
+["Order of operations with variables","evaluate","Treat a variable as a number you do not yet know; still follow PEMDAS."],
+["Properties of real numbers","combine","Commutative, associative, and distributive properties rewrite expressions."],
+["Translating sentences","evaluate","'Difference' means subtract; 'product' means multiply; 'quotient' means divide."]
+]],
+["Solving equations",[
+["One-step and two-step","two_step","Inverse operations undo the equation in reverse order."],
+["Multi-step equations","two_step","Simplify, collect like terms, then isolate x."],
+["Equations with fractions","two_step","Multiply through by the LCD to clear denominators."],
+["Literal equations","one_step","Solve a formula for one variable in terms of the others."]
+]],
+["Inequalities",[
+["Solving linear inequalities","ineq","Same steps as equations; flip when multiplying or dividing by a negative."],
+["Compound inequalities","ineq","AND is an intersection; OR is a union."],
+["Absolute value equations","absval","|x|=a means x=a or x=−a when a≥0."],
+["Absolute value inequalities intro","absval","|x|<a means −a<x<a. |x|>a means x<−a or x>a."]
+]],
+["Functions",[
+["Relations vs functions","func","A function passes the vertical line test: no input maps to two outputs."],
+["Function notation","func","f(3) means evaluate the function at x=3."],
+["Domain and range","func","Domain is allowed inputs; range is resulting outputs."],
+["Arithmetic sequences as functions","arith_seq","aₙ = a₁ + (n−1)d is a linear function of n."]
+]],
+["Linear functions",[
+["Rate of change","slope","Average rate of change between two points is slope."],
+["Slope-intercept form","line","y=mx+b is ready to graph."],
+["Point-slope form","line","y−y₁=m(x−x₁) uses a known point and slope."],
+["Standard form and intercepts","line","Ax+By=C. x-intercept when y=0; y-intercept when x=0."]
+]],
+["Systems",[
+["Graphical meaning","system","The intersection point is the simultaneous solution."],
+["Substitution","system","Best when a variable is already isolated."],
+["Elimination","system","Multiply if needed so coefficients of one variable match or oppose."],
+["Systems of inequalities idea","ineq","The solution is the overlap of two half-planes."]
+]],
+["Exponents and exponentials",[
+["Exponent rules in algebra","exp_rules","Add, subtract, or multiply exponents only with the same base."],
+["Exponential functions","growth","f(x)=abˣ grows (b>1) or decays (0<b<1)."],
+["Growth and decay stories","growth","Use f(t)=a(1+r)ᵗ or a(1−r)ᵗ."],
+["Comparing linear and exponential","growth","Linear adds; exponential multiplies. Exponential eventually overtakes linear growth."]
+]],
+["Polynomials",[
+["Degree and terms","combine","Degree is the highest total exponent in a term."],
+["Adding and subtracting polynomials","combine","Combine like terms only."],
+["Multiplying polynomials","expand","Distribute every term in the first factor to every term in the second."],
+["Special products","expand","(a+b)²=a²+2ab+b² and (a+b)(a−b)=a²−b²."]
+]],
+["Factoring",[
+["GCF factoring","factor","Always factor out the GCF first."],
+["Trinomials x²+bx+c","factor","Find two numbers that multiply to c and add to b."],
+["Difference of squares","factor","a²−b²=(a−b)(a+b)."],
+["Zero product property","factor","If AB=0, then A=0 or B=0."]
+]],
+["Quadratic graphs",[
+["Parabolas","quad_eval","y=ax²+bx+c opens up if a>0 and down if a<0."],
+["Vertex and axis of symmetry","quad_eval","Axis is x=−b/(2a). The vertex sits on that line."],
+["Intercepts of a parabola","quad_eval","y-intercept is c. x-intercepts are the roots."],
+["Evaluating quadratic models","quad_eval","Substitute the given x and simplify."]
+]],
+["Quadratic equations",[
+["Solving by factoring","factor","Factor, set each factor to 0, solve."],
+["Square roots","qformula","If x²=k and k>0, x=±√k."],
+["Quadratic formula","qformula","x=(−b±√(b²−4ac))/(2a)."],
+["Discriminant","qformula","b²−4ac: positive two real roots, zero one real root, negative no real roots."]
+]],
+["Statistics",[
+["Mean, median, mode review","mean","Choose mean for symmetric data and median when outliers pull the mean."],
+["Box plots idea","range","A box plot shows min, Q1, median, Q3, and max."],
+["Two-way tables review","prob","Use joint, marginal, and conditional relative frequencies."],
+["Interpreting a model","mean","A model is useful only inside the range of the data that built it."]
+]],
+["Review",[
+["Linear vs quadratic vs exponential","func","Compare tables: constant first differences, constant second differences, or constant ratios."],
+["Systems and linear review","system","Check solutions in every original equation."],
+["Polynomial and factoring review","factor","Factor to solve and to rewrite."],
+["Algebra 1 mixed review","qformula","Put functions, equations, and quadratics together."]
+]]
+]},
+15:{grade:"Geometry", units:[
+["Tools of geometry",[
+["Points, lines, and planes","angles","Undefined terms: a point has location, a line is straight and endless, a plane is a flat endless surface."],
+["Segments and distance","distance","Segment length is the distance between endpoints."],
+["Midpoint","midpoint","The midpoint averages the coordinates: ((x₁+x₂)/2,(y₁+y₂)/2)."],
+["Angle pairs","angles","Vertical, adjacent, complementary, and supplementary pairs have special measure rules."]
+]],
+["Reasoning",[
+["Conditional statements","angles","If p, then q. The converse swaps p and q."],
+["Algebraic properties as reasons","one_step","Addition, subtraction, and substitution properties justify equation steps."],
+["Counterexamples","func","One counterexample is enough to prove a general claim false."],
+["What a proof needs","angles","A proof chains accepted facts from given information to the conclusion."]
+]],
+["Parallel and perpendicular",[
+["Corresponding angles","angles","If lines are parallel, corresponding angles are congruent."],
+["Alternate interior angles","angles","If lines are parallel, alternate interior angles are congruent."],
+["Same-side interior angles","angles","If lines are parallel, same-side interior angles are supplementary."],
+["Slopes of parallel and perpendicular lines","slope","Parallel lines have equal slopes. Perpendicular slopes multiply to −1."]
+]],
+["Triangle congruence",[
+["SSS and SAS","similar","SSS and SAS are congruence shortcuts: matching sides/included angle."],
+["ASA and AAS","similar","ASA and AAS use two angles and a corresponding side."],
+["HL for right triangles","pyth","Two right triangles are congruent if hypotenuse and one leg match."],
+["CPCTC idea","similar","Corresponding parts of congruent triangles are congruent."]
+]],
+["Relationships in triangles",[
+["Triangle sum and exterior angle","triangle_sum","An exterior angle equals the sum of the two remote interior angles."],
+["Isosceles triangle theorem","triangle_sum","Base angles of an isosceles triangle are congruent."],
+["Midsegment","similar","A midsegment is parallel to the third side and half as long."],
+["Centers intro","midpoint","Centroid, incenter, circumcenter, and orthocenter are special concurrency points."]
+]],
+["Polygons and quadrilaterals",[
+["Interior angle sum","triangle_sum","Sum of interior angles of an n-gon is (n−2)×180°."],
+["Parallelogram properties","angles","Opposite sides and angles are congruent; diagonals bisect each other."],
+["Rectangles, rhombi, squares","angles","A square is a rectangle and a rhombus: all right angles and all sides equal."],
+["Trapezoids","angles","A trapezoid has exactly one pair of parallel sides (common school definition)."]
+]],
+["Similarity",[
+["Similar polygons","similar","Equal corresponding angles and proportional corresponding sides."],
+["AA similarity","similar","Two pairs of congruent angles make triangles similar."],
+["Side-splitters and proportions","prop","A line parallel to one side of a triangle divides the other two sides proportionally."],
+["Scale factor and area","similar","Length × k, area × k²."]
+]],
+["Right triangles and trigonometry",[
+["Pythagorean theorem review","pyth","Use a²+b²=c² only in right triangles."],
+["Special right triangles","pyth","45-45-90 sides are x, x, x√2. 30-60-90 sides are x, x√3, 2x."],
+["Sine, cosine, tangent","trig","SOH-CAH-TOA defines the three basic ratios."],
+["Solving a right triangle","trig","Use a trig ratio or Pythagoras, depending on the given parts."]
+]],
+["Circles",[
+["Central angles and arcs","circ","A central angle equals its intercepted arc measure."],
+["Inscribed angles","circ","An inscribed angle is half of its intercepted arc."],
+["Chords and diameters","circ","A diameter is a longest chord and passes through the center."],
+["Circumference and arc length","circ","Arc length = (θ/360)×2πr."]
+]],
+["Area",[
+["Triangles and parallelograms","area_tri","A=bh/2 for triangles; A=bh for parallelograms."],
+["Trapezoid area","area_rect","A=(1/2)(b₁+b₂)h."],
+["Regular polygons","area_tri","A=(1/2)aP, with apothem a and perimeter P."],
+["Circle area and sectors","area_circle","Sector area = (θ/360)×πr²."]
+]],
+["Surface area and volume",[
+["Prisms and cylinders","volume_cyl","V=Bh. For a cylinder B=πr²."],
+["Pyramids and cones","volume_cone","V=(1/3)Bh."],
+["Spheres","volume_sphere","V=(4/3)πr³ and SA=4πr²."],
+["Density and mixed measures","volume","Density = mass / volume."]
+]],
+["Coordinate geometry",[
+["Distance formula","distance","d=√[(x₂−x₁)²+(y₂−y₁)²]."],
+["Midpoint formula","midpoint","Average x and average y."],
+["Equations of lines in geometry","line","Use slope from coordinates, then point-slope form."],
+["Coordinate proofs idea","distance","Place a figure on the plane and use distance, midpoint, and slope."]
+]],
+["Geometric probability and review",[
+["Length and area probability","prob","P = favorable measure / total measure."],
+["Triangle and parallel review","triangle_sum","Angle chasing uses 180° and parallel-line facts."],
+["Similarity and trig review","trig","Set up the ratio that uses the two known sides."],
+["Geometry mixed review","pyth","Combine triangles, circles, and measurement."]
+]]
+]},
+16:{grade:"Pre-calculus", units:[
+["Functions and graphs",[
+["Function review","func","A function pairs each domain value with one range value."],
+["Transformations of functions","func","f(x−h)+k shifts right h and up k. −f(x) reflects over the x-axis."],
+["Even and odd functions","func","Even: f(−x)=f(x). Odd: f(−x)=−f(x)."],
+["Composition","compose","(f∘g)(x)=f(g(x)). Do g first."]
+]],
+["Polynomial functions",[
+["End behavior","func","The leading term decides what happens as x → ±∞."],
+["Zeros and factors","factor","If f(a)=0, then (x−a) is a factor."],
+["Remainder theorem","evaluate","The remainder when f is divided by (x−a) is f(a)."],
+["Sketching from zeros and stretch","quad_eval","Plot intercepts, use multiplicity for bounce vs cross, then apply end behavior."]
+]],
+["Rational functions",[
+["Domain of a rational function","func","Exclude x-values that make the denominator 0."],
+["Vertical asymptotes","func","A vertical asymptote often occurs where the denominator is 0 after simplifying."],
+["Horizontal asymptotes","func","Compare degrees of numerator and denominator."],
+["Simplifying rational expressions","eq_frac","Factor, then cancel common factors. Cancellation changes missing points, not the simplified algebraic value for other x."]
+]],
+["Exponential functions",[
+["Graphs of bˣ","growth","b>1 grows; 0<b<1 decays. All pass through (0,1)."],
+["Exponential equations","exp_eq","Rewrite both sides with the same base, then set exponents equal."],
+["Growth and decay models","growth","A=A₀e^{kt} or A₀(1+r)ᵗ, depending on the context."],
+["Half-life idea","decay","Half-life is the time needed for a quantity to drop to half."]
+]],
+["Logarithms",[
+["Logs as exponents","log","log_b a = c means bᶜ = a."],
+["Common and natural logs","log","log means log₁₀. ln means logₑ."],
+["Product, quotient, power rules","log_prop","log(xy)=log x+log y, log(x/y)=log x−log y, log(xⁿ)=n log x."],
+["Solving log equations","log","Convert to exponential form, or combine logs first, then convert."]
+]],
+["Trigonometric functions",[
+["Radian measure","degrees_rad","π radians = 180°. Multiply degrees by π/180 to get radians."],
+["Unit circle coordinates","unit_circle","(cos θ, sin θ) is the point at angle θ on the unit circle."],
+["Exact values","unit_circle","Memorize 0°, 30°, 45°, 60°, 90° (and radian twins)."],
+["Graphs of sine and cosine","func","Period of sin and cos is 2π. Amplitude is |A| in A sin(Bx)."]
+]],
+["Analytic trigonometry",[
+["Pythagorean identities","trig","sin²θ + cos²θ = 1."],
+["Reciprocal identities","trig","csc=1/sin, sec=1/cos, cot=1/tan."],
+["Solving basic trig equations","unit_circle","Find all angles in one period that satisfy the ratio, then add the period."],
+["Inverse trig values","unit_circle","arcsin, arccos, and arctan return principal-range angles."]
+]],
+["Applications of trigonometry",[
+["Right-triangle applications","trig","Choose sin, cos, or tan from the sides you know and want."],
+["Angle of elevation and depression","trig","These angles are measured from the horizontal."],
+["Law of sines intro","trig","a/sin A = b/sin B = c/sin C in any triangle."],
+["Area of a triangle with SAS","area_tri","A=(1/2)ab sin C."]
+]],
+["Polar and vectors",[
+["Polar coordinates idea","degrees_rad","A point is (r, θ): distance from the origin and an angle."],
+["Vector components","func","⟨a,b⟩ has horizontal component a and vertical component b."],
+["Magnitude of a vector","distance","||⟨a,b⟩|| = √(a²+b²)."],
+["Adding vectors","func","Add components: ⟨a,b⟩+⟨c,d⟩=⟨a+c,b+d⟩."]
+]],
+["Conic sections",[
+["Circles","distance","(x−h)²+(y−k)²=r² has center (h,k) and radius r."],
+["Parabolas as conics","quad_eval","A parabola is the set of points equidistant from a focus and a directrix."],
+["Ellipses idea","distance","An ellipse is the set of points whose distances to two foci sum to a constant."],
+["Hyperbolas idea","distance","A hyperbola uses a constant difference of distances to two foci."]
+]],
+["Sequences and series",[
+["Arithmetic sequences","arith_seq","aₙ=a₁+(n−1)d."],
+["Geometric sequences","geo_seq","aₙ=a₁·rⁿ⁻¹."],
+["Partial sums","series_sum","Arithmetic: Sₙ=n/2·(first+last). Geometric: Sₙ=a₁(1−rⁿ)/(1−r) if r≠1."],
+["Infinite geometric series","series_sum","If |r|<1, S=a₁/(1−r)."]
+]],
+["Limits",[
+["Limit idea","limit","lim x→c f(x) is the y-value f approaches as x approaches c."],
+["Direct substitution","limit","If f is a polynomial, lim x→c f(x)=f(c)."],
+["Holes and canceled factors","limit","If a factor cancels, the limit may exist even if f(c) is undefined."],
+["Limits to infinity idea","limit","For a rational function, end behavior follows the leading terms."]
+]],
+["Review and calculus readiness",[
+["Function toolkit review","compose","Know linear, quadratic, polynomial, rational, exponential, log, and trig families."],
+["Equation solving review","exp_eq","Use inverses: roots, logs, and inverse trig."],
+["Trig and identities review","unit_circle","Move between degrees, radians, and exact values."],
+["Pre-calculus mixed review","limit","A limit, a composition, and a log equation is a fair final mix."]
+]]
+]}
+};
+
+const WEEKS=[];
+Object.keys(RAW).map(Number).sort((a,b)=>a-b).forEach(age=>{
+  const {grade, units}=RAW[age];
+  let n=0;
+  units.forEach((unit,ui)=>{
+    unit[1].forEach(row=>{
+      n++;
+      WEEKS.push({id:age+"-"+n, age, grade, week:n, unit:unit[0], quarter:Math.ceil(n/13), title:row[0], type:row[1], concept:row[2]});
+    });
+  });
+});
+
+function ageNum(age, lo, hi){ return rand(lo,hi) }
+
+function makeProblem(type, age){
+  const G={
+    place(){const n=age<=8?rand(100,9999):rand(1000,999999); const s=String(n); const i=rand(0,s.length-1); const val=Number(s[i])*10**(s.length-1-i); const names=["ones","tens","hundreds","thousands","ten thousands","hundred thousands"]; return {q:`In ${n.toLocaleString()}, what is the value of the digit ${s[i]}?`, ...trio(val,[Number(s[i]), Number(s[i])*10, val*10]), explanation:`That ${s[i]} sits ${s.length-1-i} place(s) left of the ones place, so its value is ${s[i]} × ${10**(s.length-1-i)} = ${val}.`}},
+    expanded(){const h=rand(1,9), t=rand(0,9), o=rand(0,9); const n=100*h+10*t+o; return {q:`What is ${n} in expanded form?`, ...trio(`${100*h} + ${10*t} + ${o}`,[`${h} + ${t} + ${o}`, `${h}+${t}+${o}+${n}`]), explanation:`${n} = ${h} hundreds + ${t} tens + ${o} ones = ${100*h} + ${10*t} + ${o}.`}},
+    compare(){const a=rand(20,900), b=a+pick([-80,-20,-5,5,20,80]); return {q:`Which symbol belongs in ${a} __ ${b}?`, ...trio(a>b?">":a<b?"<":"=",[a>b?"<":">","≥"]), explanation:`${a} is ${a>b?"greater":a<b?"less":"equal"} than ${b}, so the correct symbol is ${a>b?">":a<b?"<":"="}.`}},
+    order_nums(){const a=rand(10,40),b=a+rand(3,20),c=b+rand(3,20); return {q:`Which list is in order from least to greatest?`, ...trio(`${a}, ${b}, ${c}`,[`${c}, ${b}, ${a}`,`${b}, ${a}, ${c}`]), explanation:`${a} < ${b} < ${c}, so least to greatest is ${a}, ${b}, ${c}.`}},
+    round(){const n=rand(24,980); const place=age<=8?pick([10,100]):pick([10,100,1000]); const ans=Math.round(n/place)*place; return {q:`Round ${n} to the nearest ${place}.`, ...trio(ans,[Math.floor(n/place)*place, Math.ceil(n/place)*place, n]), explanation:`Look at the digit one place to the right of the ${place}s place. Then ${n} rounds to ${ans}.`}},
+    add(){const a=rand(age<=8?20:100, age<=8?400:800), b=rand(11, age<=8?300:500); return {q:`What is ${a} + ${b}?`, ...trio(a+b,[a+b+10,a+b-10,a+b+100]), explanation:`${a} + ${b} = ${a+b}. Add place by place and regroup if a column reaches 10.`}},
+    sub(){const a=rand(50,900), b=rand(10,a-5); return {q:`What is ${a} − ${b}?`, ...trio(a-b,[a+b,a-b+10,b-a]), explanation:`${a} − ${b} = ${a-b}. Subtract place by place, borrowing if needed.`}},
+    mul_small(){const a=rand(2,10),b=rand(2,10); return {q:`What is ${a} × ${b}?`, ...trio(a*b,[a+b,a*b+a,a*(b-1)]), explanation:`${a} groups of ${b} equal ${a*b}.`}},
+    mul_2d(){const a=rand(12,28),b=rand(3,12); return {q:`Compute ${a} × ${b}.`, ...trio(a*b,[(a-1)*b,a*(b+1),a+b]), explanation:`${a}×${b} = (${Math.floor(a/10)*10}×${b}) + (${a%10}×${b}) = ${Math.floor(a/10)*10*b} + ${(a%10)*b} = ${a*b}.`}},
+    mul_3d(){const a=rand(102,240),b=rand(3,8); return {q:`Compute ${a} × ${b}.`, ...trio(a*b,[a+b,a*b+10,a*(b-1)]), explanation:`Multiply ${a} by ${b} place by place to get ${a*b}.`}},
+    div_exact(){const b=rand(3,9),q=rand(4,12),a=b*q; return {q:`What is ${a} ÷ ${b}?`, ...trio(q,[b,q+1,a-b]), explanation:`${b} × ${q} = ${a}, so ${a} ÷ ${b} = ${q}.`}},
+    div_rem(){const d=rand(3,9),q=rand(3,11),r=rand(1,d-1),n=d*q+r; return {q:`What is ${n} ÷ ${d} as quotient and remainder?`, ...trio(`${q} R ${r}`,[`${q} R 0`,`${q+1} R ${r}`,`${q} R ${d}`]), explanation:`${d}×${q}=${d*q} and ${n}-${d*q}=${r}, so ${q} R ${r}. The remainder must be less than ${d}.`}},
+    unit_frac(){const d=pick([2,3,4,5,6,8]); return {q:`A whole is split into ${d} equal parts. What is one part?`, ...trio(`1/${d}`,[`1/${d+1}`,`${d}/1`,`1/${d-1||2}`]), explanation:`One equal part out of ${d} is the unit fraction 1/${d}.`}},
+    frac_whole(){const d=pick([4,5,6,8]),n=rand(1,d-1); return {q:`What fraction of a whole is ${n} parts if the whole has ${d} equal parts?`, ...trio(`${n}/${d}`,[`${d}/${n}`,`1/${n}`,`${n}/${n}`]), explanation:`Numerator counts parts you have (${n}); denominator counts parts in the whole (${d}).`}},
+    compare_frac(){const d=pick([5,6,8,10]),a=rand(1,d-2),b=rand(a+1,d-1); return {q:`Which is larger, ${a}/${d} or ${b}/${d}?`, ...trio(`${b}/${d}`,[`${a}/${d}`,"They are equal"]), explanation:`Same denominator, so the larger numerator wins: ${b}/${d} > ${a}/${d}.`}},
+    eq_frac(){const n=rand(1,5),d=n+rand(1,6),k=rand(2,5); return {q:`Which fraction is equivalent to ${n}/${d}?`, ...trio(`${n*k}/${d*k}`,[`${n+k}/${d+k}`,`${n*k}/${d}`,`${n}/${d*k}`]), explanation:`Multiply top and bottom by ${k}: ${n}/${d} = ${n*k}/${d*k}.`}},
+    add_frac(){const d=pick([6,8,10,12]),a=rand(1,d/2),b=rand(1,d-a); return {q:`What is ${a}/${d} + ${b}/${d}?`, ...trio(simp(a+b,d),[`${a+b}/${d+d}`,simp(Math.abs(a-b),d)]), explanation:`Like denominators: add numerators ${a}+${b}=${a+b} and keep ${d}, then simplify if possible to ${simp(a+b,d)}.`}},
+    sub_frac(){const d=pick([6,8,10,12]),a=rand(3,d-1),b=rand(1,a-1); return {q:`What is ${a}/${d} − ${b}/${d}?`, ...trio(simp(a-b,d),[simp(a+b,d),`${a-b}/${d*2}`]), explanation:`Subtract numerators and keep ${d}: ${a-b}/${d} = ${simp(a-b,d)}.`}},
+    mul_frac(){const a=rand(1,4),b=pick([2,3,4,5]),c=rand(1,4),d=pick([2,3,4,5]); return {q:`What is ${a}/${b} × ${c}/${d}?`, ...trio(simp(a*c,b*d),[simp(a*c,b),simp(a+c,b+d)]), explanation:`Multiply across: (${a}×${c})/(${b}×${d}) = ${a*c}/${b*d} = ${simp(a*c,b*d)}.`}},
+    div_frac(){const a=rand(1,5),b=pick([2,3,4]),c=1,d=pick([2,3,4]); return {q:`What is ${a} ÷ ${c}/${d}?`, ...trio(simp(a*d,c),[simp(a,d),String(a+d)]), explanation:`Dividing by ${c}/${d} is multiplying by ${d}/${c}. ${a} × ${d}/${c} = ${simp(a*d,c)}.`}},
+    mixed_num(){const w=rand(1,4),n=rand(1,3),d=n+rand(1,4); return {q:`Write ${w} ${n}/${d} as an improper fraction.`, ...trio(`${w*d+n}/${d}`,[`${w+n}/${d}`,`${w*n}/${d}`]), explanation:`${w} ${n}/${d} = (${w}×${d} + ${n})/${d} = ${w*d+n}/${d}.`}},
+    dec_place(){const t=rand(1,9); return {q:`What is the value of the digit ${t} in 3.${t}2?`, ...trio(`${t}/10`,[`${t}/100`,String(t),`${t}/1000`]), explanation:`That digit is in the tenths place, so its value is ${t} tenths = ${t}/10.`}},
+    dec_add(){const a=rand(15,80)/10,b=rand(20,95)/100,s=Math.round((a+b)*100)/100; return {q:`What is ${a.toFixed(1)} + ${b.toFixed(2)}?`, ...trio(s.toFixed(2),[(s+0.1).toFixed(2),(a+b*10).toFixed(2)]), explanation:`Line up the decimals: ${a.toFixed(1)} + ${b.toFixed(2)} = ${s.toFixed(2)}.`}},
+    dec_sub(){const a=rand(40,90)/10,b=rand(10,35)/10,s=Math.round((a-b)*10)/10; return {q:`What is ${a.toFixed(1)} − ${b.toFixed(1)}?`, ...trio(s.toFixed(1),[(a+b).toFixed(1),(s+1).toFixed(1)]), explanation:`${a.toFixed(1)} − ${b.toFixed(1)} = ${s.toFixed(1)}.`}},
+    dec_mul(){const a=rand(2,9)/10,b=rand(2,8); const p=Math.round(a*b*10)/10; return {q:`What is ${a} × ${b}?`, ...trio(String(p),[String(a+b),String(Math.round(a*b*100)/100+1)]), explanation:`${a}×${b}=${p}. Count decimal places in the factors, then place the point in the product.`}},
+    percent(){const n=pick([10,20,25,40,50,75]); return {q:`${n}% is equal to which fraction?`, ...trio(simp(n,100),[`${n}/10`,`1/${n}`]), explanation:`Percent means per 100, so ${n}% = ${n}/100 = ${simp(n,100)}.`}},
+    pct_of(){const p=pick([10,20,25,50]), n=pick([20,40,60,80,120]); return {q:`What is ${p}% of ${n}?`, ...trio(n*p/100,[n*p,n+p,n-p]), explanation:`${p}% = ${p/100}. ${p/100} × ${n} = ${n*p/100}.`}},
+    pct_change(){const a=pick([50,80,100,200]), p=pick([10,20,25]); return {q:`Increase ${a} by ${p}%. What is the new amount?`, ...trio(a*(100+p)/100,[a*p/100,a-a*p/100,a+p]), explanation:`New = ${a} × (1 + ${p/100}) = ${a} × ${(1+p/100).toFixed(2)} = ${a*(100+p)/100}.`}},
+    area_rect(){const l=rand(4,14),w=rand(3,10); return {q:`A rectangle is ${l} by ${w}. What is its area?`, ...trio(`${l*w} square units`,[`${2*(l+w)} square units`,`${l+w} square units`]), explanation:`Area = length × width = ${l}×${w}=${l*w} square units.`}},
+    area_tri(){const b=rand(6,16),h=rand(4,12); return {q:`A triangle has base ${b} and height ${h}. What is its area?`, ...trio(b*h/2,[b*h,b+h]), explanation:`A = (1/2)bh = (1/2)×${b}×${h} = ${b*h/2}.`}},
+    area_circle(){const r=rand(2,8); return {q:`Using π ≈ 3.14, what is the area of a circle with radius ${r}?`, ...trio((Math.round(3.14*r*r*100)/100).toFixed(2),[(Math.round(2*3.14*r*100)/100).toFixed(2),String(r*r)]), explanation:`A=πr² ≈ 3.14×${r}² = 3.14×${r*r} = ${(Math.round(3.14*r*r*100)/100).toFixed(2)}.`}},
+    peri(){const l=rand(5,12),w=rand(3,9); return {q:`A rectangle is ${l} by ${w}. What is its perimeter?`, ...trio(2*(l+w),[l*w,l+w,2*l+w]), explanation:`P=2l+2w=2(${l}+${w})=2(${l+w})=${2*(l+w)}.`}},
+    volume(){const l=rand(3,8),w=rand(2,6),h=rand(2,5); return {q:`A rectangular prism is ${l} by ${w} by ${h}. What is its volume?`, ...trio(l*w*h,[l*w,2*(l*w+w*h+h*l)]), explanation:`V=lwh=${l}×${w}×${h}=${l*w*h}.`}},
+    volume_cyl(){const r=rand(2,5),h=rand(3,10); return {q:`Using π ≈ 3.14, volume of a cylinder with r=${r} and h=${h}?`, ...trio((Math.round(3.14*r*r*h*100)/100).toFixed(2),[String(3.14*2*r*h),String(r*r*h)]), explanation:`V=πr²h ≈ 3.14×${r*r}×${h} = ${(Math.round(3.14*r*r*h*100)/100).toFixed(2)}.`}},
+    volume_cone(){const r=3,h=pick([3,6,9]); return {q:`Using π ≈ 3.14, volume of a cone with r=${r} and h=${h}?`, ...trio((Math.round((1/3)*3.14*r*r*h*100)/100).toFixed(2),[String(Math.round(3.14*r*r*h)),String(r*h)]), explanation:`V=(1/3)πr²h ≈ (1/3)×3.14×${r*r}×${h} = ${(Math.round((1/3)*3.14*r*r*h*100)/100).toFixed(2)}.`}},
+    volume_sphere(){const r=pick([3,6]); return {q:`Using π ≈ 3.14, volume of a sphere with r=${r}?`, ...trio((Math.round((4/3)*3.14*r*r*r*100)/100).toFixed(2),[String(4*3.14*r*r),String(r*r*r)]), explanation:`V=(4/3)πr³ ≈ (4/3)×3.14×${r**3} = ${(Math.round((4/3)*3.14*r**3*100)/100).toFixed(2)}.`}},
+    surface(){const l=rand(3,6),w=rand(2,5),h=rand(2,4); const sa=2*(l*w+w*h+h*l); return {q:`Surface area of a ${l}×${w}×${h} rectangular prism?`, ...trio(sa,[l*w*h,l*w]), explanation:`SA=2(lw+wh+hl)=2(${l*w}+${w*h}+${h*l})=${sa}.`}},
+    order_ops(){const a=rand(2,7),b=rand(3,8),c=rand(2,6); return {q:`Evaluate ${a} + ${b} × ${c}.`, ...trio(a+b*c,[(a+b)*c,a*b+c]), explanation:`Multiply first: ${b}×${c}=${b*c}, then ${a}+${b*c}=${a+b*c}.`}},
+    evaluate(){const m=rand(2,6),x=rand(2,8),b=rand(1,9); return {q:`Evaluate ${m}x + ${b} when x=${x}.`, ...trio(m*x+b,[m+x+b,m*x-b]), explanation:`${m}(${x})+${b}=${m*x}+${b}=${m*x+b}.`}},
+    combine(){const a=rand(2,8),b=rand(2,8); return {q:`Simplify ${a}x + ${b}x.`, ...trio(`${a+b}x`,[`${a+b}x²`,`${a*b}x`]), explanation:`Like terms: (${a}+${b})x = ${a+b}x.`}},
+    distributive(){const a=rand(2,7),b=rand(2,8),c=rand(2,8); return {q:`Expand ${a}(${b}x + ${c}).`, ...trio(`${a*b}x + ${a*c}`,[`${a+b}x + ${c}`,`${a*b}x + ${c}`]), explanation:`Distribute: ${a}·${b}x + ${a}·${c} = ${a*b}x + ${a*c}.`}},
+    expand(){const a=rand(1,5),b=rand(1,5); return {q:`Expand (x + ${a})(x + ${b}).`, ...trio(`x² + ${a+b}x + ${a*b}`,[`x² + ${a*b}x + ${a+b}`,`x² + ${a+b}x + ${a+b}`]), explanation:`FOIL: x² + ${b}x + ${a}x + ${a*b} = x² + ${a+b}x + ${a*b}.`}},
+    one_step(){const x=rand(3,14),k=rand(4,12); const kind=rand(0,2); if(kind===0) return {q:`Solve x + ${k} = ${x+k}.`, ...trio(x,[x+k,k]), explanation:`Subtract ${k} from both sides: x=${x}.`}; if(kind===1) return {q:`Solve ${k}x = ${k*x}.`, ...trio(x,[k,k*x]), explanation:`Divide both sides by ${k}: x=${x}.`}; return {q:`Solve x − ${k} = ${x-k}.`, ...trio(x,[x-k,k]), explanation:`Add ${k} to both sides: x=${x}.`}},
+    two_step(){const x=rand(2,10),m=rand(2,6),b=rand(2,12); return {q:`Solve ${m}x + ${b} = ${m*x+b}.`, ...trio(x,[x+b,m,m*x]), explanation:`Subtract ${b} to get ${m}x=${m*x}. Divide by ${m}: x=${x}.`}},
+    ineq(){const x=rand(2,8),k=rand(3,10); return {q:`Solve x + ${k} > ${x+k+2}. Which is the solution?`, ...trio(`x > ${x+2}`,[`x < ${x+2}`,`x = ${x+2}`]), explanation:`Subtract ${k}: x > ${x+k+2}-${k} = ${x+2}.`}},
+    integers(){const a=rand(2,12),b=rand(2,12); const kind=rand(0,2); if(kind===0) return {q:`What is ${a} + (${-b})?`, ...trio(a-b,[a+b,-(a+b)]), explanation:`Adding a negative is subtracting: ${a}−${b}=${a-b}.`}; if(kind===1) return {q:`What is ${a} − (${-b})?`, ...trio(a+b,[a-b,-(a-b)]), explanation:`Subtracting a negative is adding: ${a}+${b}=${a+b}.`}; return {q:`What is (${-a}) × (${-b})?`, ...trio(a*b,[-(a*b),a-b]), explanation:`A negative times a negative is positive: ${a*b}.`}},
+    absval(){const a=rand(3,12); return {q:`What is |${-a}|?`, ...trio(a,[-a,0,1]), explanation:`Absolute value is distance from 0, so |${-a}|=${a}.`}},
+    ratio(){const a=rand(2,6),b=rand(3,9),k=rand(2,5); return {q:`Which ratio is equivalent to ${a}:${b}?`, ...trio(`${a*k}:${b*k}`,[`${a+k}:${b+k}`,`${a*k}:${b}`]), explanation:`Multiply both parts by ${k} to get ${a*k}:${b*k}.`}},
+    unit_rate(){const p=rand(2,6),c=p*rand(3,8); return {q:`A pack of ${p} costs $${c}. What is the unit price?`, ...trio(`$${c/p}`,[`$${c+p}`,`$${p}`]), explanation:`Unit price = ${c} ÷ ${p} = ${c/p} dollars each.`}},
+    prop(){const a=rand(2,8),b=rand(3,9),k=rand(2,6); return {q:`Solve ${a}/${b} = x/${b*k}. What is x?`, ...trio(a*k,[a+b,b*k,a*b]), explanation:`Cross-multiply: ${a}·${b*k}=${b}·x → x=${a*k}. The second ratio is scaled by ${k}.`}},
+    slope(){const x1=rand(-4,3),y1=rand(-3,4),dx=rand(1,5),dy=pick([-6,-4,-3,-2,-1,1,2,3,4,6]); const x2=x1+dx,y2=y1+dy; const g=gcd(dy,dx); const ans=Number.isInteger(dy/dx)?String(dy/dx):`${dy/g}/${dx/g}`; return {q:`Slope through (${x1}, ${y1}) and (${x2}, ${y2})?`, ...trio(ans,[String(dx), `${-dy}/${dx}`]), explanation:`m=(${y2}−${y1})/(${x2}−${x1})=${dy}/${dx}${ans!==`${dy}/${dx}`?" = "+ans:""}.`}},
+    line(){const m=rand(-4,5)||2,b=rand(-5,7),x=rand(-3,4); return {q:`For y=${m}x + ${b}, what is y when x=${x}?`, ...trio(m*x+b,[m+b,m*x,x+b]), explanation:`y=${m}(${x})+${b}=${m*x+b}.`}},
+    system(){const x=rand(2,8),y=rand(1,7); return {q:`Solve y=${y} and x+y=${x+y}. What is (x,y)?`, ...trio(`(${x}, ${y})`,[`(${y}, ${x})`,`(${x+y}, ${y})`]), explanation:`y=${y}, so x+${y}=${x+y} → x=${x}. Solution (${x}, ${y}).`}},
+    pyth(){const trips=[[3,4,5],[5,12,13],[6,8,10],[9,12,15],[8,15,17]]; const [a,b,c]=pick(trips); return rand(0,1)?{q:`Right triangle legs ${a} and ${b}. Hypotenuse?`, ...trio(c,[a+b,c-1]), explanation:`c=√(${a}²+${b}²)=√(${a*a}+${b*b})=√${a*a+b*b}=${c}.`}:{q:`Right triangle hypotenuse ${c} and leg ${a}. Other leg?`, ...trio(b,[c-a,c]), explanation:`b=√(${c}²−${a}²)=√(${c*c}−${a*a})=${b}.`}},
+    distance(){const x1=rand(-3,3),y1=rand(-3,3),dx=pick([3,4,5,6,8]),dy=0; return {q:`Distance from (${x1}, ${y1}) to (${x1+dx}, ${y1})?`, ...trio(dx,[dx+y1,Math.abs(x1)]), explanation:`The y-coordinates match, so distance is |${x1+dx}−${x1}|=${dx}.`}},
+    midpoint(){const x1=rand(-6,6),y1=rand(-6,6),x2=x1+pick([2,4,6,8]),y2=y1+pick([2,4,6]); return {q:`Midpoint of (${x1}, ${y1}) and (${x2}, ${y2})?`, ...trio(`(${(x1+x2)/2}, ${(y1+y2)/2})`,[`(${x1}, ${y1})`,`(${x2-x1}, ${y2-y1})`]), explanation:`Average the coordinates: ((${x1}+${x2})/2, (${y1}+${y2})/2) = (${(x1+x2)/2}, ${(y1+y2)/2}).`}},
+    exp_rules(){const a=rand(2,5),m=rand(2,4),n=rand(2,3); return rand(0,1)?{q:`Simplify ${a}^${m} · ${a}^${n}.`, ...trio(`${a}^${m+n}`,[`${a}^${m*n}`,`${a*2}^${m+n}`]), explanation:`Same base: add exponents → ${a}^${m+n}.`}:{q:`Simplify (${a}^${m})^${n}.`, ...trio(`${a}^${m*n}`,[`${a}^${m+n}`,`${a*n}^${m}`]), explanation:`Power of a power: multiply exponents → ${a}^${m*n}.`}},
+    sci(){const lead=rand(11,89), exp=rand(2,5), n=lead*10**(exp-1); const a=(n/10**exp); return {q:`Write ${n.toLocaleString()} in scientific notation.`, ...trio(`${a} × 10^${exp}`,[`${a} × 10^${exp-1}`,`${lead} × 10^${exp}`]), explanation:`Move the decimal ${exp} places so the first factor is between 1 and 10.`}},
+    factor(){const p=rand(1,6),q=rand(1,6); return {q:`Factor x² + ${p+q}x + ${p*q}.`, ...trio(`(x+${p})(x+${q})`,[`(x+${p+q})(x+${p*q})`,`(x-${p})(x-${q})`]), explanation:`Need numbers that multiply to ${p*q} and add to ${p+q}: ${p} and ${q}.`}},
+    quad_eval(){const b=rand(-4,4)||-2,c=rand(-3,5),x=rand(-3,4); const val=x*x+b*x+c; const bs=b<0?`− ${-b}x`:`+ ${b}x`; const cs=c<0?`− ${-c}`:`+ ${c}`; return {q:`If f(x)=x² ${bs} ${cs}, what is f(${x})?`, ...trio(val,[x*x+c,val+1]), explanation:`(${x})² + (${b})(${x}) + (${c}) = ${x*x} + ${b*x} + ${c} = ${val}.`}},
+    qformula(){return pick([
+      {q:"Solutions of x² − 5x + 6 = 0?", ...trio("2 and 3",["1 and 6","−2 and −3"]), explanation:"(x−2)(x−3)=0, so x=2 or x=3."},
+      {q:"Discriminant of x² + 3x + 2 = 0?", ...trio("1",["0","17"]), explanation:"b²−4ac=9−8=1."},
+      {q:"How many distinct real solutions does x²−4x+4=0 have?", ...trio("1",["0","2"]), explanation:"Discriminant 16−16=0, so one real (repeated) root."}
+    ])},
+    similar(){const s=rand(3,8),k=rand(2,4),o=s+rand(1,5); return {q:`Similar triangles have corresponding sides ${s} and ${s*k}. If another small side is ${o}, what is the matching large side?`, ...trio(o*k,[o+k,s*o]), explanation:`Scale factor = ${k}. Matching side = ${o}×${k}=${o*k}.`}},
+    angles(){const a=rand(20,70); return {q:`Two supplementary angles, one measures ${a}°. What is the other?`, ...trio(180-a,[90-a,180+a,a]), explanation:`Supplementary angles sum to 180°, so the other is 180−${a}=${180-a}°.`}},
+    triangle_sum(){const a=rand(30,80),b=rand(30,80); if(a+b>=170) return G.angles(); return {q:`A triangle has angles ${a}° and ${b}°. What is the third angle?`, ...trio(180-a-b,[a+b,90]), explanation:`Angles in a triangle sum to 180°, so 180−${a}−${b}=${180-a-b}°.`}},
+    trig(){return pick([
+      {q:"Opposite=3, hypotenuse=6. What is sin θ?", ...trio("1/2",["2","3/6 + 1"]), explanation:"sin=opposite/hypotenuse=3/6=1/2."},
+      {q:"Adjacent=4, hypotenuse=8. What is cos θ?", ...trio("1/2",["2","4"]), explanation:"cos=adjacent/hypotenuse=4/8=1/2."},
+      {q:"Opposite=5, adjacent=5. What is tan θ?", ...trio("1",["0","25"]), explanation:"tan=opposite/adjacent=5/5=1."},
+      {q:"Which ratio is tan θ?", ...trio("opposite / adjacent",["opposite / hypotenuse","adjacent / hypotenuse"]), explanation:"SOH-CAH-TOA: tangent is opposite over adjacent."}
+    ])},
+    circ(){const r=rand(2,10); return {q:`Using π ≈ 3.14, circumference of a circle with radius ${r}?`, ...trio((Math.round(2*3.14*r*100)/100).toFixed(2),[(Math.round(3.14*r*r*100)/100).toFixed(2),String(2*r)]), explanation:`C=2πr≈2×3.14×${r}=${(Math.round(2*3.14*r*100)/100).toFixed(2)}.`}},
+    growth(){const a=pick([100,200,500]),r=pick([10,20]),t=2; return {q:`$${a} grows at ${r}% per year for ${t} years. New amount?`, ...trio(a*((1+r/100)**t),[a+a*r/100*t,a*(1+r/100)]), explanation:`A=a(1+r)ᵗ=${a}(1+${(r/100).toFixed(2)})^${t}=${a*((1+r/100)**t)}.`}},
+    decay(){const a=pick([80,160,200]),r=pick([10,25]); return {q:`${a} decreases by ${r}%. What remains?`, ...trio(a*(100-r)/100,[a*r/100,a+a*r/100]), explanation:`Remaining = ${a}×(1−${r/100})=${a*(100-r)/100}.`}},
+    func(){const m=rand(2,6),b=rand(-4,6),x=rand(-3,5); return {q:`If f(x)=${m}x ${b<0?"−":"+"} ${Math.abs(b)}, what is f(${x})?`, ...trio(m*x+b,[m+x+b,x]), explanation:`f(${x})=${m}(${x}) ${b<0?"−":"+"} ${Math.abs(b)}=${m*x+b}.`}},
+    compose(){const a=rand(2,5),b=rand(1,6),x=rand(1,5); return {q:`f(x)=${a}x and g(x)=x+${b}. What is (f∘g)(${x})?`, ...trio(a*(x+b),[a*x+b,x+b+a]), explanation:`g(${x})=${x}+${b}=${x+b}. Then f(${x+b})=${a}×${x+b}=${a*(x+b)}.`}},
+    log(){return pick([
+      {q:"What is log₂ 16?", ...trio("4",["2","8"]), explanation:"2⁴=16, so log₂ 16=4."},
+      {q:"What is log₁₀ 1000?", ...trio("3",["2","10"]), explanation:"10³=1000."},
+      {q:"If log₃ x=2, what is x?", ...trio("9",["6","8"]), explanation:"3²=x, so x=9."},
+      {q:"What is log₅ 1?", ...trio("0",["1","5"]), explanation:"Any valid base to the power 0 is 1."}
+    ])},
+    log_prop(){return pick([
+      {q:"log 3 + log 5 equals which log?", ...trio("log 15",["log 8","log 2"]), explanation:"Product rule: log 3 + log 5 = log(3×5)=log 15."},
+      {q:"2 log 5 equals?", ...trio("log 25",["log 10","log 7"]), explanation:"Power rule: 2 log 5 = log(5²)=log 25."}
+    ])},
+    exp_eq(){return pick([
+      {q:"Solve 2ˣ = 32.", ...trio("5",["4","16"]), explanation:"32=2⁵, so x=5."},
+      {q:"Solve 3ˣ = 9.", ...trio("2",["3","9"]), explanation:"9=3², so x=2."},
+      {q:"Solve 10ˣ = 1000.", ...trio("3",["2","4"]), explanation:"1000=10³, so x=3."}
+    ])},
+    unit_circle(){return pick([
+      {q:"What is sin 30°?", ...trio("1/2",["0","√3/2"]), explanation:"Opposite/hypotenuse in a 30-60-90 triangle is 1/2."},
+      {q:"What is cos 60°?", ...trio("1/2",["√3/2","1"]), explanation:"cos 60°=1/2."},
+      {q:"What is tan 45°?", ...trio("1",["0","√2/2"]), explanation:"Opposite=adjacent in a 45-45-90 triangle."},
+      {q:"What is sin 90°?", ...trio("1",["0","1/2"]), explanation:"On the unit circle, 90° is (0,1); sine is the y-coordinate."}
+    ])},
+    degrees_rad(){return pick([
+      {q:"Convert 180° to radians.", ...trio("π",["2π","π/2"]), explanation:"180°=π radians."},
+      {q:"Convert π/2 radians to degrees.", ...trio("90°",["45°","180°"]), explanation:"π radians=180°, so π/2=90°."},
+      {q:"Convert 360° to radians.", ...trio("2π",["π","π/2"]), explanation:"A full turn is 2π radians."}
+    ])},
+    arith_seq(){const a=rand(2,10),d=rand(2,6),n=rand(4,8); return {q:`Arithmetic sequence: first term ${a}, common difference ${d}. What is term ${n}?`, ...trio(a+(n-1)*d,[a+n*d,a+d]), explanation:`aₙ=a₁+(n−1)d=${a}+(${n}−1)${d}=${a+(n-1)*d}.`}},
+    geo_seq(){const a=pick([2,3]),r=pick([2,3]),n=pick([4,5]); return {q:`Geometric sequence: first term ${a}, ratio ${r}. What is term ${n}?`, ...trio(a*r**(n-1),[a*r*n,a+r*(n-1)]), explanation:`aₙ=a₁·rⁿ⁻¹=${a}·${r}^${n-1}=${a*r**(n-1)}.`}},
+    series_sum(){const a=rand(2,5),d=rand(2,5),n=rand(4,6); const last=a+(n-1)*d; const s=n/2*(a+last); return {q:`Sum of ${n} terms of an arithmetic series with first term ${a} and last term ${last}?`, ...trio(s,[n*(a+last),a+last]), explanation:`Sₙ=n/2·(first+last)=${n}/2·(${a}+${last})=${s}.`}},
+    limit(){const m=rand(2,6),b=rand(-4,8),c=rand(-3,5); return {q:`What is lim x→${c} (${m}x + ${b})?`, ...trio(m*c+b,[m+c+b,c]), explanation:`A polynomial is continuous, so the limit equals the function value: ${m}(${c})+${b}=${m*c+b}.`}},
+    mean(){const a=rand(2,10),b=rand(2,10),c=rand(2,10); const sum=a+b+c; return {q:`Mean of ${a}, ${b}, and ${c}?`, ...trio(Number.isInteger(sum/3)?String(sum/3):(Math.round(sum/3*100)/100).toString(),[String(sum),String(Math.max(a,b,c))]), explanation:`Mean=(${a}+${b}+${c})/3=${sum}/3=${Number.isInteger(sum/3)?sum/3:(sum+"/3")}.`}},
+    median(){const arr=shuffle([rand(1,5),rand(6,10),rand(11,16)]); const sorted=[...arr].sort((x,y)=>x-y); return {q:`Median of ${arr.join(", ")}?`, ...trio(sorted[1],[sorted[0],sorted[2]]), explanation:`Sorted: ${sorted.join(", ")}. The middle value is ${sorted[1]}.`}},
+    mode(){const a=rand(2,8),b=a+rand(1,5); return {q:`Mode of ${a}, ${b}, ${a}, ${b+1}?`, ...trio(a,[b,b+1]), explanation:`${a} appears most often, so the mode is ${a}.`}},
+    range(){const a=rand(2,8),b=a+rand(6,15); return {q:`Range of ${a}, ${a+2}, ${b}?`, ...trio(b-a,[b,a+2]), explanation:`Range=max−min=${b}−${a}=${b-a}.`}},
+    prob(){const t=pick([6,8,10]),f=rand(1,t-1); return {q:`A spinner has ${t} equal sections, ${f} red. P(red)?`, ...trio(`${f}/${t}`,[`${t}/${f}`,`1/${f}`]), explanation:`P=favorable/total=${f}/${t}.`}},
+    coord(){const x=rand(-4,4)||2,y=rand(-4,4)||-3; return {q:`A point is ${x} units right/left and ${y} units up/down from the origin. What are its coordinates?`, ...trio(`(${x}, ${y})`,[`(${y}, ${x})`,`(${-x}, ${y})`]), explanation:`x describes horizontal move, y describes vertical move, so the point is (${x}, ${y}).`}},
+    gcf(){const g=pick([2,3,4,5,6]),a=g*rand(2,5),b=g*rand(2,5); return {q:`What is a common factor of ${a} and ${b}?`, ...trio(String(g),[String(a+b),String(Math.max(a,b))]), explanation:`${g} divides both ${a} and ${b}. (The GCF may be ${g} or a multiple of ${g} that still divides both.)`}},
+    lcm(){const a=pick([3,4,5,6]),b=pick([4,5,6,8]); const l=a*b/gcd(a,b); return {q:`What is the LCM of ${a} and ${b}?`, ...trio(l,[a*b,gcd(a,b),a+b]), explanation:`LCM is the smallest shared multiple, which is ${l}.`}},
+    pattern(){const a=rand(2,8),d=rand(2,6); return {q:`The pattern is ${a}, ${a+d}, ${a+2*d}, … What is the next term?`, ...trio(a+3*d,[a+d,a+2*d+1]), explanation:`The rule is add ${d}. Next is ${a+2*d}+${d}=${a+3*d}.`}},
+    inout(){const k=rand(2,6),x=rand(3,10); return {q:`The rule is multiply by ${k}, then add 1. What is the output for ${x}?`, ...trio(k*x+1,[k*x,x+1+k]), explanation:`${x}×${k}+1=${k*x+1}.`}},
+    elapsed(){const h=rand(1,10), add=pick([15,30,45,60,90]); const startM=pick([0,15,30]); const tot=h*60+startM+add; const eh=Math.floor(tot/60)%12 || 12; const em=tot%60; const sm=String(startM).padStart(2,"0"); const ems=String(em).padStart(2,"0"); return {q:`A clock shows ${h}:${sm}. What time is it after ${add} minutes?`, ...trio(`${eh}:${ems}`,[`${h}:${ems}`,`${eh}:${sm}`]), explanation:`${add} minutes after ${h}:${sm} is ${eh}:${ems}.`}},
+    money(){const q=rand(1,4),d=rand(1,4); const cents=25*q+10*d; return {q:`${q} quarter(s) and ${d} dime(s) total how many cents?`, ...trio(cents,[25*q+d,10*q+25*d]), explanation:`${q}×25 + ${d}×10 = ${25*q}+${10*d}=${cents} cents.`} }
+  };
+  const fn=G[type]||G.add;
+  let p;
+  try{p=fn()}catch(e){p=G.add()}
+  if(!p||!p.choices||p.answer<0) p=G.add();
+  return p;
+}
+
+let currentAge=8, currentQ="all", query="";
+let state=null;
+const home=document.getElementById("home");
+const lesson=document.getElementById("lesson");
+const backBtn=document.getElementById("backBtn");
+const weekGrid=document.getElementById("weekGrid");
+
+function renderFilters(){
+  const ages=[8,9,10,11,12,13,14,15,16];
+  document.getElementById("ageBar").innerHTML=ages.map(a=>`<button class="${currentAge===a?"on":""}" data-age="${a}">Age ${a}</button>`).join("");
+  document.getElementById("ageBar").querySelectorAll("button").forEach(b=>b.onclick=()=>{currentAge=Number(b.dataset.age);renderAll()});
+  document.getElementById("qBar").innerHTML=["all",1,2,3,4].map(q=>`<button class="${currentQ==q?"on":""}" data-q="${q}">${q==="all"?"All 52 weeks":"Q"+q+" · Weeks "+((q-1)*13+1)+"–"+q*13}</button>`).join("");
+  document.getElementById("qBar").querySelectorAll("button").forEach(b=>b.onclick=()=>{currentQ=b.dataset.q==="all"?"all":Number(b.dataset.q);renderWeeks()});
+}
+
+function visibleWeeks(){
+  return WEEKS.filter(w=>w.age===currentAge && (currentQ==="all"||w.quarter===currentQ) && (!query|| (w.title+" "+w.unit+" "+w.concept).toLowerCase().includes(query)));
+}
+
+function renderWeeks(){
+  const list=visibleWeeks();
+  const grade=RAW[currentAge].grade;
+  document.getElementById("count").textContent=`Age ${currentAge} · ${grade} · showing ${list.length} of 52 weeks`;
+  weekGrid.innerHTML=list.map(w=>`
+    <button class="card" data-id="${w.id}">
+      <div class="tag">Week ${w.week} · ${w.unit}</div>
+      <h3>${w.title}</h3>
+      <p>5 problems · ${grade}</p>
+    </button>`).join("");
+  weekGrid.querySelectorAll(".card").forEach(card=>card.onclick=()=>openWeek(card.dataset.id));
+}
+
+function renderAll(){renderFilters();renderWeeks()}
+
+function openWeek(id){
+  const week=WEEKS.find(w=>w.id===id);
+  const problems=Array.from({length:5},()=>makeProblem(week.type, week.age));
+  state={week,problems,i:0,picked:Array(5).fill(null)};
+  home.classList.add("hidden"); lesson.classList.remove("hidden"); backBtn.classList.remove("hidden");
+  renderLesson();
+}
+
+function renderLesson(){
+  const {week,problems,i,picked}=state;
+  const finished=picked.every(v=>v!==null) && i===problems.length-1 && picked[i]!==null && state.showDone;
+  if(state.showDone){
+    const score=picked.reduce((s,sel,idx)=>s+(sel===problems[idx].answer?1:0),0);
+    lesson.innerHTML=`<div class="concept done"><h2>Week ${week.week} complete</h2><p>You answered ${score} of 5 correctly.</p><p>${week.title} · Age ${week.age}</p><p style="margin-top:16px"><button class="primary" id="again">Practice this week again</button></p></div>`;
+    document.getElementById("again").onclick=()=>openWeek(week.id);
+    return;
+  }
+  const p=problems[i];
+  const sel=picked[i];
+  const pct=((i+(sel!=null?1:0))/5)*100;
+  lesson.innerHTML=`
+    <div class="concept">
+      <div class="meta">Age ${week.age} · ${week.grade} · Week ${week.week} of 52 · ${week.unit}</div>
+      <h2>${week.title}</h2>
+      <p>${week.concept}</p>
+    </div>
+    <div class="problem">
+      <div class="meta">Problem ${i+1} of 5</div>
+      <div class="progress"><span style="width:${pct}%"></span></div>
+      <div class="q">${p.q}</div>
+      <div class="choices">
+        ${p.choices.map((c,idx)=>{
+          let cls="choice";
+          if(sel!=null){ if(idx===p.answer) cls+=" correct"; else if(idx===sel) cls+=" wrong"; }
+          return `<button class="${cls}" data-idx="${idx}" ${sel!=null?"disabled":""}>${c}</button>`;
+        }).join("")}
+      </div>
+      ${sel!=null?`<div class="feedback ${sel===p.answer?"ok":"no"}"><strong>${sel===p.answer?"Correct.":"Not quite."}</strong> ${p.explanation}</div>`:""}
+      <div class="nav-row">
+        <button class="ghost" id="prevP" ${i===0?"disabled":""}>Previous</button>
+        <button class="primary" id="nextP" ${sel==null?"disabled":""}>${i===4?"Finish week":"Next problem"}</button>
+      </div>
+    </div>`;
+  lesson.querySelectorAll(".choice").forEach(btn=>btn.onclick=()=>{state.picked[i]=Number(btn.dataset.idx);renderLesson()});
+  document.getElementById("prevP").onclick=()=>{state.i=Math.max(0,i-1);renderLesson()};
+  document.getElementById("nextP").onclick=()=>{
+    if(i===4){state.showDone=true;renderLesson()}
+    else {state.i=i+1;renderLesson()}
+  };
+}
+
+backBtn.onclick=()=>{lesson.classList.add("hidden");home.classList.remove("hidden");backBtn.classList.add("hidden");state=null};
+document.getElementById("search").oninput=e=>{query=e.target.value.trim().toLowerCase();renderWeeks()};
+renderAll();
+</script>
+</body>
+</html>
